@@ -17,7 +17,7 @@ class Sz:
     def make_png(self):
         self.set_gis_data(json.load(self.gis_json_data))
         self.set_html()
-        imgkit.from_string(self.html, 'image.png', {"xvfb": ""})
+        imgkit.from_string(self.html, 'pi.png', {"xvfb": ""})
 
     def set_html(self):
         html = """
