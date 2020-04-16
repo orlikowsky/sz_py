@@ -1,6 +1,7 @@
 import imgkit
 import urllib.request
 import json
+from datetime import datetime
 
 
 class Sz:
@@ -12,12 +13,34 @@ class Sz:
         self.confirmed = 0
         self.recovered_percentage = 0
         self.deaths_percentage = 0
+        self.filename = ''
+        self.replace_open_graph()
         self.make_png()
 
     def make_png(self):
         self.set_gis_data(json.load(self.gis_json_data))
         self.set_html()
-        imgkit.from_string(self.html, 'pi.png', {"xvfb": ""})
+        imgkit.from_string(self.html, self.get_filename(), {"xvfb": ""})
+
+    def replace_open_graph(self):
+        with open('../orleta/public/sz/index.html', 'r') as file:
+            data = file.readlines()
+
+        timestamp = int(datetime.now().timestamp())
+        filename = str(timestamp)+'.png'
+
+        data[19] = '<meta property="og:image" content="http://sluzbazdrowia.info/img/'+filename+'" />'
+
+        self.set_filename(filename)
+
+        with open('../orleta/public/sz/index.html', 'w') as file:
+            file.writelines(data)
+
+    def set_filename(self, filename):
+        self.filename = filename
+
+    def get_filename(self):
+        return self.filename
 
     def set_html(self):
         html = """
@@ -62,5 +85,3 @@ class Sz:
 
 
 sz = Sz()
-
-
