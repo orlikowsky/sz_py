@@ -33,7 +33,7 @@ class Sz:
 
         self.set_filename(filename)
 
-        with open('../orleta/public/sz/index.html', 'w') as file:
+        with open('index.html', 'w') as file:
             file.writelines(data)
 
     def set_filename(self, filename):
