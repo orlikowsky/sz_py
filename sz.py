@@ -31,7 +31,7 @@ class Sz:
         timestamp = int(datetime.now().timestamp())
         filename = str(timestamp)+'.png'
 
-        data[19] = '<meta property="og:image" content="http://sluzbazdrowia.info/img/'+filename+'" />'
+        data[18] = '<meta property="og:image" content="http://sluzbazdrowia.info/img/'+filename+'" />'
 
         self.set_filename(filename)
 
